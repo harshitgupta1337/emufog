@@ -104,7 +104,7 @@ public class MaxiNetExporter implements IGraphExporter {
             EmulationSettings emu = n.getEmulationNode();
             DockerType docker = emu.getDockerType();
             lines.add(n.getName() + " = topo.addHost(\"" + n.getName() + "\", cls=Docker, ip=\"" + emu.getIP() +
-                    "\", dimage=\"" + docker.dockerImage + "\", mem_limit=" + docker.memoryLimit + ")");
+                    "\", dimage=\"" /*+ docker.dockerImage*/ + "\", mem_limit=" + docker.memoryLimit + ")");
         }
     }
 

@@ -46,7 +46,7 @@ public class Emufog {
             JCommander.newBuilder().addObject(arguments).build().parse(args);
 
             // read in the settings file
-            Settings settings = SettingsReader.read(arguments.settingsPath);
+            Settings settings = SettingsReader.read(arguments.settingsPath, arguments.imagesPath);
 
             // determines the respective format reader
             GraphReader reader = getReader(arguments.inputType, settings);
