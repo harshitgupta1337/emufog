@@ -1,6 +1,10 @@
 package emufog.launcher;
 
+import java.io.IOException;
+import java.nio.file.Paths;
+
 import com.beust.jcommander.JCommander;
+
 import emufog.backbone.BackboneClassifier;
 import emufog.docker.FogType;
 import emufog.export.IGraphExporter;
@@ -9,6 +13,8 @@ import emufog.fog.FogNodeClassifier;
 import emufog.fog.FogResult;
 import emufog.graph.Graph;
 import emufog.graph.Node;
+import emufog.images.IApplicationImageAssignmentPolicy;
+import emufog.images.RandomImageAssignmentPolicy;
 import emufog.reader.BriteFormatReader;
 import emufog.reader.CaidaFormatReader;
 import emufog.reader.GraphReader;
@@ -17,9 +23,6 @@ import emufog.settings.SettingsReader;
 import emufog.util.Logger;
 import emufog.util.LoggerLevel;
 import emufog.util.Tuple;
-
-import java.io.IOException;
-import java.nio.file.Paths;
 
 /**
  * The EmuFog main launcher class. Starts a new instance of the application with the given parameters
@@ -80,7 +83,9 @@ public class Emufog {
                 for (Tuple<Node, FogType> tuple : result.getFogNodes()) {
                     graph.placeFogNode(tuple.getKey(), tuple.getValue());
                 }
-
+                IApplicationImageAssignmentPolicy policy = new RandomImageAssignmentPolicy();
+                policy.generateCommandsLists(graph, settings);
+                policy.generateImageMapping(graph, settings);
                 IGraphExporter exporter = new MaxiNetExporter();
                 exporter.exportGraph(graph, Paths.get(arguments.output));
             } else {

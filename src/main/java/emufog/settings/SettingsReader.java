@@ -40,9 +40,8 @@ public class SettingsReader {
         JSONSettings jsonSettings = new Gson().fromJson(new FileReader(settingsPath.toFile()), JSONSettings.class);
         JSONImages jsonImages = new Gson().fromJson(new FileReader(imagesPath.toFile()), JSONImages.class);
 
-        if (jsonSettings != null) {
+        if (jsonSettings != null && jsonImages != null) {
             // create the actual settings object with the information of the read in objects
-        	System.out.println(jsonImages.Images);
             settings = new Settings(jsonSettings, jsonImages);
         }
 

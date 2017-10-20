@@ -378,4 +378,13 @@ public class Graph {
 	public Map<Integer, List<String>> getCommands() {
 		return nodeToCommandsMap;
 	}
+	
+	public void setImages(Map<? extends Integer, ? extends String> map) {
+		nodeToImageMap.clear();
+		nodeToImageMap.putAll(map);
+	}
+	public void setCommands(Map<? extends Integer, ? extends List<String>> map) {
+		nodeToCommandsMap.clear();
+		nodeToCommandsMap.putAll(map);
+	}
 }

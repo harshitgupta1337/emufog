@@ -7,7 +7,7 @@ package emufog.docker;
 public abstract class DockerType {
 
     /* name of the docker image */
-    //public final String dockerImage;
+    public String dockerImage;
 
     /* upper memory limit in Bytes for the docker image */
     public final int memoryLimit;
@@ -34,6 +34,7 @@ public abstract class DockerType {
         }*/
 
         //this.dockerImage = dockerImage;
+    	this.dockerImage = "";
         this.memoryLimit = memoryLimit;
         this.cpuShare = cpuShare;
     }
@@ -44,7 +45,7 @@ public abstract class DockerType {
 
         if (obj instanceof DockerType) {
             DockerType other = (DockerType) obj;
-            result = /*dockerImage.equals(other.dockerImage) &&*/ memoryLimit == other.memoryLimit
+            result = dockerImage.equals(other.dockerImage) && memoryLimit == other.memoryLimit
                     && cpuShare == other.cpuShare;
         }
 
