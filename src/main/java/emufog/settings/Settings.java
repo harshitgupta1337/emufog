@@ -44,7 +44,10 @@ public class Settings {
     /* indicator whether the fog graph should be build in parallel */
     public final boolean fogGraphParallel;
     
-    public final List<String> images;
+
+	public final List<String> fogImages;
+
+	public final List<String> deviceImages;
 
     /**
      * Creates a new instance of the Settings class using the JSON object.
@@ -81,9 +84,13 @@ public class Settings {
             deviceNodeTypes.add(new DeviceType(/*deviceType.DockerImage.toString(),*/ deviceType.ScalingFactor,
                     deviceType.AverageDeviceCount, deviceType.MemoryLimit, deviceType.CPUShare));
         }
-        images = new ArrayList<>();
-        for (SettingsReader.DockerName name: imageFile.Images) {
-        	images.add(name.toString());
+        fogImages = new ArrayList<>();
+        deviceImages = new ArrayList<>();
+        for (SettingsReader.DockerName name: imageFile.FogImages) {
+        	fogImages.add(name.toString());
+        }
+        for (SettingsReader.DockerName name: imageFile.DeviceImages) {
+        	deviceImages.add(name.toString());
         }
     }
 }

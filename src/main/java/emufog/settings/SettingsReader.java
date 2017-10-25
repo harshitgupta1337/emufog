@@ -64,7 +64,8 @@ public class SettingsReader {
         Collection<FogType> FogNodeTypes;
     }
     class JSONImages {
-    	Collection<DockerName> Images;
+    	Collection<DockerName> FogImages;
+    	Collection<DockerName> DeviceImages;
     }
 
     /**
