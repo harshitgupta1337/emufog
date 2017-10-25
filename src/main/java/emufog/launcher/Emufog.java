@@ -7,6 +7,7 @@ import com.beust.jcommander.JCommander;
 
 import emufog.backbone.BackboneClassifier;
 import emufog.docker.FogType;
+import emufog.export.CoupledMaxiNetExporter;
 import emufog.export.IGraphExporter;
 import emufog.export.MaxiNetExporter;
 import emufog.fog.FogNodeClassifier;
@@ -86,7 +87,7 @@ public class Emufog {
                 IApplicationImageAssignmentPolicy policy = new RandomImageAssignmentPolicy();
                 policy.generateCommandsLists(graph, settings);
                 policy.generateImageMapping(graph, settings);
-                IGraphExporter exporter = new MaxiNetExporter();
+                IGraphExporter exporter = new CoupledMaxiNetExporter();
                 exporter.exportGraph(graph, Paths.get(arguments.output));
             } else {
                 // no fog placement found, aborting
