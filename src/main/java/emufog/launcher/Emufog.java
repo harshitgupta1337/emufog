@@ -9,13 +9,12 @@ import emufog.backbone.BackboneClassifier;
 import emufog.docker.FogType;
 import emufog.export.CoupledMaxiNetExporter;
 import emufog.export.IGraphExporter;
-import emufog.export.MaxiNetExporter;
 import emufog.fog.FogNodeClassifier;
 import emufog.fog.FogResult;
 import emufog.graph.Graph;
 import emufog.graph.Node;
 import emufog.images.IApplicationImageAssignmentPolicy;
-import emufog.images.RandomImageAssignmentPolicy;
+import emufog.images.MongoCaseAssignmentPolicy;
 import emufog.reader.BriteFormatReader;
 import emufog.reader.CaidaFormatReader;
 import emufog.reader.GraphReader;
@@ -84,9 +83,9 @@ public class Emufog {
                 for (Tuple<Node, FogType> tuple : result.getFogNodes()) {
                     graph.placeFogNode(tuple.getKey(), tuple.getValue());
                 }
-                IApplicationImageAssignmentPolicy policy = new RandomImageAssignmentPolicy();
-                policy.generateCommandsLists(graph, settings);
+                IApplicationImageAssignmentPolicy policy = new MongoCaseAssignmentPolicy();
                 policy.generateImageMapping(graph, settings);
+                policy.generateCommandsLists(graph, settings);
                 IGraphExporter exporter = new CoupledMaxiNetExporter();
                 exporter.exportGraph(graph, Paths.get(arguments.output));
             } else {
